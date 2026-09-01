@@ -3147,6 +3147,27 @@ app.get('/api/captura/rascunhos/todos', (req, res) => {
 });
 
 // ============================================
+// ROTA PARA EXECUTAR O SEED
+// ============================================
+app.post('/api/seed', (req, res) => {
+    try {
+        console.log('📦 Executando seed...');
+        // Executa o seed.js
+        require('./seed.js');
+        res.json({
+            mensagem: 'Seed executado com sucesso!',
+            status: 'success'
+        });
+    } catch (err) {
+        console.error('❌ Erro no seed:', err);
+        res.status(500).json({
+            erro: err.message,
+            status: 'error'
+        });
+    }
+});
+
+// ============================================
 //  INICIAR SERVIDOR
 // ============================================
 app.listen(PORT, () => {
