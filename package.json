@@ -1,0 +1,22 @@
+{
+  "name": "sigad-e-arq-brasil",
+  "version": "2.0.0",
+  "description": "Sistema Informatizado de Gestão Arquivística de Documentos - e-ARQ Brasil",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.6",
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
