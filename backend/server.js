@@ -3209,6 +3209,26 @@ app.post('/api/seed-demo', (req, res) => {
 });
 
 // ============================================
+// ROTA PARA CRIAR 100 CLASSES
+// ============================================
+app.post('/api/seed-100-classes', (req, res) => {
+    try {
+        console.log('📦 Criando 100 classes...');
+        require('./seed-100-classes.js');
+        res.json({
+            mensagem: '100 classes criadas com sucesso!',
+            status: 'success'
+        });
+    } catch (err) {
+        console.error('❌ Erro ao criar classes:', err);
+        res.status(500).json({
+            erro: err.message,
+            status: 'error'
+        });
+    }
+});
+
+// ============================================
 //  INICIAR SERVIDOR
 // ============================================
 app.listen(PORT, () => {
