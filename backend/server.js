@@ -3168,6 +3168,26 @@ app.post('/api/seed', (req, res) => {
 });
 
 // ============================================
+// ROTA PARA EXECUTAR O SEED DE DEMONSTRAÇÃO
+// ============================================
+app.post('/api/seed-demo', (req, res) => {
+    try {
+        console.log('📦 Executando seed de demonstração...');
+        require('./seed-demo.js');
+        res.json({
+            mensagem: 'Demonstração concluída com sucesso! 200 documentos inseridos!',
+            status: 'success'
+        });
+    } catch (err) {
+        console.error('❌ Erro no seed-demo:', err);
+        res.status(500).json({
+            erro: err.message,
+            status: 'error'
+        });
+    }
+});
+
+// ============================================
 //  INICIAR SERVIDOR
 // ============================================
 app.listen(PORT, () => {
