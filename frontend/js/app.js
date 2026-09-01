@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://sigad-backend.onrender.com/api';
 let currentModule = 'dashboard';
 let classesCache = [];
 let componentesCaptura = [];
