@@ -3229,6 +3229,35 @@ app.post('/api/seed-100-classes', (req, res) => {
 });
 
 // ============================================
+// ROTA PARA POPULAR TUDO DE UMA VEZ
+// ============================================
+app.post('/api/seed-tudo', (req, res) => {
+    try {
+        console.log('📦 Populando tudo...');
+
+        // 1. Criar 100 classes
+        require('./seed-100-classes.js');
+
+        // 2. Popular temporalidades
+        require('./seed.js');
+
+        // 3. Popular documentos
+        require('./seed-demo.js');
+
+        res.json({
+            mensagem: 'Tudo populado com sucesso! 100 classes, 19 temporalidades e 200 documentos!',
+            status: 'success'
+        });
+    } catch (err) {
+        console.error('❌ Erro ao popular tudo:', err);
+        res.status(500).json({
+            erro: err.message,
+            status: 'error'
+        });
+    }
+});
+
+// ============================================
 //  INICIAR SERVIDOR
 // ============================================
 app.listen(PORT, () => {
