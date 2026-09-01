@@ -3,10 +3,31 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
-const fs = require('fs');  // <-- ADICIONE ESTA LINHA
+const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 3000;  // <-- MUDE PARA process.env.PORT
+
+// ============================================
+// CONFIGURAÇÃO CORS - PERMITIR ACESSO DO VERCEL
+// ============================================
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
+}));
+
+// Middleware adicional para garantir CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
+
+const PORT = process.env.PORT || 3000;
 
 // ============================================
 // CRIA A PASTA DATABASE AUTOMATICAMENTE
